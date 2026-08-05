@@ -60,7 +60,7 @@ To run remote training on Modal, set up the following secrets in your Modal work
 Clone the repository and install the package with dev dependencies:
 
 ```bash
-git clone [https://github.com/njand/latin-asr-postprocessing.git](https://github.com/njand/latin-asr-postprocessing.git)
+git clone https://github.com/njand/latin-asr-postprocessing.git
 cd latin-asr-postprocessing
 pip install -e .[dev]
 ```
@@ -114,4 +114,4 @@ modal run apps/wipe_modal_cache.py
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` for details.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/njand/latin-asr-postprocess/blob/main/LICENSE) for details.
