@@ -1,0 +1,43 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+devel/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Modal & ML Checkpoints
+/mnt/cache/
+*.ckpt
+*.pt
+emissions.csv
+
+# Testing & Linting
+.pytest_cache/
+.ruff_cache/
+.coverage
+
+# IDEs
+.idea/
+.vscode/
+
+# OS Specific
+.DS_Store
+
+# Miscellaneous
+dump_repo.py
+repo_dump.md
+apps/debug_overfit.py
+onnx_export/

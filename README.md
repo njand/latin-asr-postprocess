@@ -99,7 +99,7 @@ python scripts/infer.py --text "dicam plane caesar quod sentio"
 Export the fine-tuned model to ONNX format and apply INT8 quantization for accelerated CPU inference:
 
 ```bash
-python scripts/export_onnx.py --model-id "njand/latin-bert-itn"
+python scripts/export_onnx.py
 ```
 
 ### 6. Clear Remote Storage (Optional)
