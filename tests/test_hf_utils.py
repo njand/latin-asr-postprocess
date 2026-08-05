@@ -1,6 +1,6 @@
 import json
 from unittest.mock import MagicMock, patch
-from latin_itn.hf_utils import ensure_branch_exists, get_branch_progress, get_latest_checkpoint
+from latin_itn_training.hf_utils import ensure_branch_exists, get_branch_progress, get_latest_checkpoint
 
 
 def test_ensure_branch_exists():

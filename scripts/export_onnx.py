@@ -40,8 +40,8 @@ from optimum.onnxruntime.configuration import AutoQuantizationConfig
 from tqdm import tqdm
 from transformers import AutoTokenizer, PreTrainedTokenizerBase
 
-from latin_itn.config import ID2LABEL
-from latin_itn.metrics import compute_metrics, to_percentage
+from latin_itn_training.config import ID2LABEL
+from latin_itn_training.metrics import compute_metrics, to_percentage
 
 # Configure logger
 logging.basicConfig(

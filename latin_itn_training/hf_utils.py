@@ -3,7 +3,7 @@ import json
 import os
 from typing import Any
 
-from latin_itn.metrics import to_percentage
+from latin_itn_training.metrics import to_percentage
 
 
 def ensure_branch_exists(api: Any, repo_id: str, branch_name: str) -> None:

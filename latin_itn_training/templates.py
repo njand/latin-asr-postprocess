@@ -1,5 +1,5 @@
 from typing import Any
-from latin_itn.metrics import to_percentage
+from latin_itn_training.metrics import to_percentage
 
 
 def build_readme_table(log_history: list[dict[str, Any]]) -> str:

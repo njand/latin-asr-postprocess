@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-from latin_itn.metrics import _parse_tag, compute_metrics, to_percentage
-from latin_itn.config import ID2LABEL
+from latin_itn_training.metrics import _parse_tag, compute_metrics, to_percentage
+from latin_itn_training.config import ID2LABEL
 
 
 def test_to_percentage():

@@ -1,7 +1,7 @@
 from typing import Any, Tuple
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
-from latin_itn.config import DEFAULT_MODEL_NAME, ID2LABEL, LABEL2ID
+from latin_itn_training.config import DEFAULT_MODEL_NAME, ID2LABEL, LABEL2ID
 
 
 def get_model_and_tokenizer(

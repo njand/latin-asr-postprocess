@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock, patch
 import torch
 
-from latin_itn.predictor import (
+from latin_itn_training.predictor import (
     LatinITNPredictor,
     _predict_chunk_tags,
     run_strided_inference,

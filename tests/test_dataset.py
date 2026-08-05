@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock
 import pytest
-from latin_itn.dataset import load_and_prepare_dataset
+from latin_itn_training.dataset import load_and_prepare_dataset
 
 
 @pytest.fixture
@@ -96,7 +96,7 @@ def test_subtoken_label_alignment_multibyte_and_hyphens(mocker):
     mock_tok.side_effect = fake_tokenize
 
     from datasets import Dataset, DatasetDict
-    from latin_itn.dataset import load_and_prepare_dataset
+    from latin_itn_training.dataset import load_and_prepare_dataset
 
     sample = {"tokens": ["armaque", "virum"], "tags": ["TITLE_NONE", "LOWER_NONE"]}
     # Provide 20 samples so train_test_split(test_size=0.05) has enough data
@@ -151,7 +151,7 @@ def test_sequence_length_filtering(mocker):
     mock_tok.side_effect = fake_tokenize
 
     from datasets import Dataset, DatasetDict
-    from latin_itn.dataset import load_and_prepare_dataset
+    from latin_itn_training.dataset import load_and_prepare_dataset
 
     long_sample = {"tokens": ["a", "b", "c", "d", "e", "f"], "tags": ["LOWER_NONE"] * 6}
     ds_dict = DatasetDict({"train": Dataset.from_list([long_sample])})

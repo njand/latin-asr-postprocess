@@ -2,8 +2,8 @@ from unittest.mock import MagicMock, patch
 import pandas as pd
 import pytest
 
-from latin_itn.config import TrainingConfig
-from latin_itn.trainer_utils import (
+from latin_itn_training.config import TrainingConfig
+from latin_itn_training.trainer_utils import (
     ModalProgressLogger,
     build_training_args,
     execute_training_step,

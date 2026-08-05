@@ -1,5 +1,5 @@
 import pytest
-from latin_itn.cltk_tokenizer import (
+from latin_itn_training.cltk_tokenizer import (
     CLTKLegacyLatinTokenizer,
     rejoin_cltk_enclitics_and_format,
 )

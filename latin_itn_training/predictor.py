@@ -6,8 +6,8 @@ Processes arbitrary-length raw Latin ASR streams cleanly with CLTK pre-tokenizat
 from typing import Any, List, Optional
 import torch
 
-from latin_itn.cltk_tokenizer import CLTKLegacyLatinTokenizer, rejoin_cltk_enclitics_and_format
-from latin_itn.models import get_model_and_tokenizer
+from latin_itn_training.cltk_tokenizer import CLTKLegacyLatinTokenizer, rejoin_cltk_enclitics_and_format
+from latin_itn_training.models import get_model_and_tokenizer
 
 
 class LatinITNPredictor:

@@ -5,7 +5,7 @@ for lossless Inverse Text Normalization (ITN) detokenization.
 """
 
 from typing import List, Tuple, NamedTuple, Optional
-from latin_itn.config import PUNCT_MAP
+from latin_itn_training.config import PUNCT_MAP
 
 QUE_EXCEPTIONS = [
     'quisque', 'quidque', 'quicque', 'quodque', 'cuiusque', 'cuique', 'quemque', 'quamque', 'quoque',

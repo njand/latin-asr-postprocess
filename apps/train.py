@@ -4,12 +4,12 @@ from typing import Any
 
 import modal
 
-from latin_itn.config import TrainingConfig
-from latin_itn.dataset import load_and_prepare_dataset
-from latin_itn.metrics import compute_metrics
-from latin_itn.models import get_model_and_tokenizer
-from latin_itn.templates import build_readme_table, generate_final_readme
-from latin_itn.trainer_utils import (
+from latin_itn_training.config import TrainingConfig
+from latin_itn_training.dataset import load_and_prepare_dataset
+from latin_itn_training.metrics import compute_metrics
+from latin_itn_training.models import get_model_and_tokenizer
+from latin_itn_training.templates import build_readme_table, generate_final_readme
+from latin_itn_training.trainer_utils import (
     ModalProgressLogger,
     execute_training_step,
     parse_emissions_summary,

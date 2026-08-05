@@ -2,7 +2,7 @@ from collections import Counter
 from typing import Dict, Tuple
 import numpy as np
 from sklearn.metrics import f1_score, precision_recall_fscore_support
-from latin_itn.config import ID2LABEL
+from latin_itn_training.config import ID2LABEL
 
 
 def to_percentage(raw_val: float) -> float:
