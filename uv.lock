@@ -1112,6 +1112,19 @@ wheels = [
 
 [[package]]
 name = "latin-itn"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "torch" },
+    { name = "transformers" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/59/7c/688ff58e4ffc395d54f7390323592ca61ec530bb258e58948f803b1fd5f6/latin_itn-0.1.1.tar.gz", hash = "sha256:3c61e8626e5990062e1dc4e5a8a8795b039f1ebdd4a5e3ae81d9d8ccf01a10d1", size = 13664, upload-time = "2026-08-05T22:07:03.287Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b2/93/4419c59fe806a4b9cafa42defa100ae854368c0d09d09119ebce83dd8b0b/latin_itn-0.1.1-py3-none-any.whl", hash = "sha256:0f17b196ae50af3029211fb4af20f952e1d3487de5f3296814a7f60592a10ead", size = 10523, upload-time = "2026-08-05T22:07:02.049Z" },
+]
+
+[[package]]
+name = "latin-itn-training"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -1120,6 +1133,7 @@ dependencies = [
     { name = "datasets" },
     { name = "evaluate" },
     { name = "huggingface-hub" },
+    { name = "latin-itn" },
     { name = "modal" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
@@ -1153,6 +1167,7 @@ requires-dist = [
     { name = "datasets", specifier = ">=2.12.0" },
     { name = "evaluate", specifier = ">=0.4.0" },
     { name = "huggingface-hub", specifier = ">=0.16.0" },
+    { name = "latin-itn", specifier = "==0.1.1" },
     { name = "modal", specifier = ">=0.60.0" },
     { name = "numpy", specifier = ">=1.24.0" },
     { name = "pandas", specifier = ">=2.0.0" },
