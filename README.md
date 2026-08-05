@@ -1,6 +1,6 @@
 # Latin ASR Post-Processing (`latin-asr-postprocess`)
 
-[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20Card-yellow)]([https://huggingface.co/njand/wav2vec2-xls-r-latin](https://huggingface.co/njand/latin-asr-postprocessor))
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20Card-yellow)[https://huggingface.co/njand/wav2vec2-xls-r-latin](https://huggingface.co/njand/latin-asr-postprocessor))
 [![Live Demo](https://img.shields.io/badge/%F0%9F%A4%97%20Gradio-Live%20Demo-blue)](https://huggingface.co/spaces/njand/latin-asr-demo)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -120,4 +120,4 @@ modal run apps/wipe_modal_cache.py
 
 ## 📄 License
 
-Distributed under the MIT License. See [`LICENSE`](https://github.com/njand/latin-asr-postprocess/blob/main/LICENSE) for details.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
