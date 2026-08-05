@@ -1,5 +1,11 @@
 # Latin ASR Post-Processing (`latin-asr-postprocess`)
 
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20Card-yellow)]([https://huggingface.co/njand/wav2vec2-xls-r-latin](https://huggingface.co/njand/latin-asr-postprocessor))
+[![Live Demo](https://img.shields.io/badge/%F0%9F%A4%97%20Gradio-Live%20Demo-blue)](https://huggingface.co/spaces/njand/latin-asr-demo)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
+
 An end-to-end pipeline for fine-tuning BERT-style transformer models (e.g., [`latincy/latin-bert`](https://huggingface.co/latincy/latin-bert)) on **Inverse Text Normalization (ITN)**. The model accepts raw, lowercased, unpunctuated text transcriptions from Latin ASR models (such as [`njand/wav2vec2-xls-r-latin`](https://huggingface.co/njand/wav2vec2-xls-r-latin)) and restores proper casing and trailing punctuation via sequence labeling.
 
 The training framework leverages **Modal** for cloud GPU execution, **Hugging Face Hub** for model tracking, **Weights & Biases** for experiment logging, and **CodeCarbon** for environmental impact measurement.
