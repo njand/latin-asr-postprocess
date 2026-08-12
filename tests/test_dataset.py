@@ -44,7 +44,7 @@ def raw_dataset_dict():
 
 def test_load_and_prepare_dataset(mocker, mock_tokenizer, raw_dataset_dict):
     """Test dataset filtering, split generation, and -100 subword label alignment."""
-    mock_datasets = mocker.patch("latin_itn.dataset.load_dataset")
+    mock_datasets = mocker.patch("latin_itn_training.dataset.load_dataset")
 
     from datasets import Dataset, DatasetDict
     ds_train = Dataset.from_list(raw_dataset_dict["train"])
@@ -70,7 +70,7 @@ def test_load_and_prepare_dataset_invalid_tag_raises(mocker, mock_tokenizer):
     """Test that invalid dataset tags not present in config schema raise a ValueError."""
     from datasets import Dataset, DatasetDict
     invalid_ds = Dataset.from_list([{"tokens": ["test"], "tags": ["INVALID_TAG_SCHEMA"]}])
-    mocker.patch("latin_itn.dataset.load_dataset", return_value=DatasetDict({"train": invalid_ds}))
+    mocker.patch("latin_itn_training.dataset.load_dataset", return_value=DatasetDict({"train": invalid_ds}))
 
     with pytest.raises(ValueError, match="Dataset contains tags not present in config.TAG_LIST"):
         load_and_prepare_dataset(mock_tokenizer, "dummy/dataset")
@@ -101,7 +101,7 @@ def test_subtoken_label_alignment_multibyte_and_hyphens(mocker):
     sample = {"tokens": ["armaque", "virum"], "tags": ["TITLE_NONE", "LOWER_NONE"]}
     # Provide 20 samples so train_test_split(test_size=0.05) has enough data
     ds_dict = DatasetDict({"train": Dataset.from_list([sample] * 20)})
-    mocker.patch("latin_itn.dataset.load_dataset", return_value=ds_dict)
+    mocker.patch("latin_itn_training.dataset.load_dataset", return_value=ds_dict)
 
     train_ds, test_ds = load_and_prepare_dataset(
         tokenizer=mock_tok,
@@ -120,7 +120,7 @@ def test_max_samples_subsampling(mocker, mock_tokenizer):
     
     samples = [{"tokens": ["cano"], "tags": ["LOWER_PERIOD"]}] * 20
     ds_dict = DatasetDict({"train": Dataset.from_list(samples)})
-    mocker.patch("latin_itn.dataset.load_dataset", return_value=ds_dict)
+    mocker.patch("latin_itn_training.dataset.load_dataset", return_value=ds_dict)
 
     train_ds, test_ds = load_and_prepare_dataset(
         tokenizer=mock_tokenizer,
@@ -155,7 +155,7 @@ def test_sequence_length_filtering(mocker):
 
     long_sample = {"tokens": ["a", "b", "c", "d", "e", "f"], "tags": ["LOWER_NONE"] * 6}
     ds_dict = DatasetDict({"train": Dataset.from_list([long_sample])})
-    mocker.patch("latin_itn.dataset.load_dataset", return_value=ds_dict)
+    mocker.patch("latin_itn_training.dataset.load_dataset", return_value=ds_dict)
 
     train_ds, test_ds = load_and_prepare_dataset(
         tokenizer=mock_tok,
@@ -178,7 +178,7 @@ def test_existing_validation_split_remapped_to_test(mocker, mock_tokenizer):
         "train": Dataset.from_list(train_data),
         "validation": Dataset.from_list(val_data),
     })
-    mocker.patch("latin_itn.dataset.load_dataset", return_value=ds_dict)
+    mocker.patch("latin_itn_training.dataset.load_dataset", return_value=ds_dict)
 
     train_ds, test_ds = load_and_prepare_dataset(
         tokenizer=mock_tokenizer,
@@ -197,7 +197,7 @@ def test_single_dataset_input_fallback(mocker, mock_tokenizer):
         {"tokens": ["armaque", "virum"], "tags": ["TITLE_NONE", "LOWER_COMMA"]},
         {"tokens": ["cano"], "tags": ["LOWER_PERIOD"]},
     ])
-    mocker.patch("latin_itn.dataset.load_dataset", return_value=raw_ds)
+    mocker.patch("latin_itn_training.dataset.load_dataset", return_value=raw_ds)
 
     train_ds, test_ds = load_and_prepare_dataset(
         tokenizer=mock_tokenizer,

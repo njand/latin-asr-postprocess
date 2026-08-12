@@ -93,7 +93,7 @@ def test_logger_on_evaluate_output(capsys):
 # Tests for build_training_args
 # ---------------------------------------------------------------------------
 
-@patch("latin_itn.trainer_utils.TrainingArguments")
+@patch("latin_itn_training.trainer_utils.TrainingArguments")
 def test_build_training_args(mock_training_args, mock_training_config):
     build_training_args(
         output_dir="/tmp/test_out",
@@ -173,8 +173,8 @@ def test_parse_emissions_summary_valid(tmp_path):
 
 @patch("wandb.init")
 @patch("wandb.finish")
-@patch("latin_itn.trainer_utils.get_branch_progress")
-@patch("latin_itn.trainer_utils.ensure_branch_exists")
+@patch("latin_itn_training.trainer_utils.get_branch_progress")
+@patch("latin_itn_training.trainer_utils.ensure_branch_exists")
 def test_execute_training_step_short_circuit(
     mock_ensure_branch,
     mock_get_progress,
@@ -211,12 +211,12 @@ def test_execute_training_step_short_circuit(
 
 @patch("wandb.init")
 @patch("wandb.finish")
-@patch("latin_itn.trainer_utils.get_latest_checkpoint", return_value=None)
-@patch("latin_itn.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
-@patch("latin_itn.trainer_utils.ensure_branch_exists")
-@patch("latin_itn.trainer_utils.get_model_and_tokenizer")
-@patch("latin_itn.trainer_utils.WeightedITNTrainer")
-@patch("latin_itn.trainer_utils.publish_model_and_readme")
+@patch("latin_itn_training.trainer_utils.get_latest_checkpoint", return_value=None)
+@patch("latin_itn_training.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
+@patch("latin_itn_training.trainer_utils.ensure_branch_exists")
+@patch("latin_itn_training.trainer_utils.get_model_and_tokenizer")
+@patch("latin_itn_training.trainer_utils.WeightedITNTrainer")
+@patch("latin_itn_training.trainer_utils.publish_model_and_readme")
 def test_execute_training_step_full_run(
     mock_publish,
     mock_trainer_cls,
@@ -281,11 +281,11 @@ def test_execute_training_step_empty_log_history_fallback(mocker, mock_training_
 
     mocker.patch("wandb.init")
     mocker.patch("wandb.finish")
-    mocker.patch("latin_itn.trainer_utils.WeightedITNTrainer", return_value=mock_trainer)
-    mocker.patch("latin_itn.trainer_utils.get_model_and_tokenizer", return_value=(MagicMock(), MagicMock()))
-    mocker.patch("latin_itn.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
-    mocker.patch("latin_itn.trainer_utils.ensure_branch_exists")
-    mocker.patch("latin_itn.trainer_utils.publish_model_and_readme")
+    mocker.patch("latin_itn_training.trainer_utils.WeightedITNTrainer", return_value=mock_trainer)
+    mocker.patch("latin_itn_training.trainer_utils.get_model_and_tokenizer", return_value=(MagicMock(), MagicMock()))
+    mocker.patch("latin_itn_training.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
+    mocker.patch("latin_itn_training.trainer_utils.ensure_branch_exists")
+    mocker.patch("latin_itn_training.trainer_utils.publish_model_and_readme")
 
     result = execute_training_step(
         config=mock_training_config,
