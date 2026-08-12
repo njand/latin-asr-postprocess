@@ -1,5 +1,7 @@
 from unittest.mock import MagicMock
+
 import pytest
+
 from latin_itn_training.dataset import load_and_prepare_dataset
 
 
@@ -96,6 +98,7 @@ def test_subtoken_label_alignment_multibyte_and_hyphens(mocker):
     mock_tok.side_effect = fake_tokenize
 
     from datasets import Dataset, DatasetDict
+
     from latin_itn_training.dataset import load_and_prepare_dataset
 
     sample = {"tokens": ["armaque", "virum"], "tags": ["TITLE_NONE", "LOWER_NONE"]}
@@ -151,6 +154,7 @@ def test_sequence_length_filtering(mocker):
     mock_tok.side_effect = fake_tokenize
 
     from datasets import Dataset, DatasetDict
+
     from latin_itn_training.dataset import load_and_prepare_dataset
 
     long_sample = {"tokens": ["a", "b", "c", "d", "e", "f"], "tags": ["LOWER_NONE"] * 6}

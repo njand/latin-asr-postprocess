@@ -1,7 +1,9 @@
 from collections import Counter
 from typing import Dict, Tuple
+
 import numpy as np
 from sklearn.metrics import f1_score, precision_recall_fscore_support
+
 from latin_itn_training.config import ID2LABEL
 
 

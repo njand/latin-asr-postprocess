@@ -1,6 +1,7 @@
 """CLI entrypoint for running ITN inference on raw Latin text."""
 
 import argparse
+
 from latin_itn import LatinITNPredictor
 
 

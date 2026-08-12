@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-
 DEFAULT_MODEL_NAME = "latincy/latin-bert"
 MAX_LENGTH = 512
 

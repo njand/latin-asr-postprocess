@@ -1,4 +1,5 @@
 from typing import Any
+
 from latin_itn_training.metrics import to_percentage
 
 

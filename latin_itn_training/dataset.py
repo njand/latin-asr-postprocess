@@ -1,5 +1,7 @@
 from typing import Any, Dict, Tuple
+
 from datasets import DatasetDict, load_dataset
+
 from latin_itn_training.config import LABEL2ID, MAX_LENGTH
 
 

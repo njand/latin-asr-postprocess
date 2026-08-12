@@ -3,8 +3,8 @@ import subprocess
 from typing import Any
 
 import modal
-
 from latin_itn.models import get_model_and_tokenizer
+
 from latin_itn_training.config import TrainingConfig
 from latin_itn_training.dataset import load_and_prepare_dataset
 from latin_itn_training.metrics import compute_metrics

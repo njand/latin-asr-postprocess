@@ -1,23 +1,29 @@
 import gc
 import os
 import time
-import numpy as np
 from collections import Counter
 from typing import Any
 
+import numpy as np
 import torch
 import torch.nn as nn
-
 from huggingface_hub import HfApi, hf_hub_download
-from transformers import Trainer, TrainerCallback, TrainingArguments, DataCollatorForTokenClassification
+from latin_itn.models import get_model_and_tokenizer
+from transformers import (
+    DataCollatorForTokenClassification,
+    Trainer,
+    TrainerCallback,
+    TrainingArguments,
+)
 from transformers.trainer_callback import PrinterCallback
 
-from latin_itn.models import get_model_and_tokenizer
-from latin_itn_training.config import TrainingConfig
-from latin_itn_training.hf_utils import ensure_branch_exists, get_branch_progress, get_latest_checkpoint
+from latin_itn_training.config import LABEL2ID, TrainingConfig
+from latin_itn_training.hf_utils import (
+    ensure_branch_exists,
+    get_branch_progress,
+    get_latest_checkpoint,
+)
 from latin_itn_training.metrics import to_percentage
-from latin_itn_training.config import LABEL2ID
-
 
 CLR_RESET = "\033[0m"
 CLR_BOLD = "\033[1m"

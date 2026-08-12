@@ -24,7 +24,7 @@ dependencies = [
     "accelerate>=0.26.0",
     "sentencepiece>=0.1.99",
     "protobuf",
-    "latin-itn==0.1.1",
+    "latin-itn>=0.1.6",
 ]
 
 [project.urls]
@@ -41,6 +41,9 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
+[tool.ruff.lint.isort]
+known-first-party = ["latin_itn_training"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
