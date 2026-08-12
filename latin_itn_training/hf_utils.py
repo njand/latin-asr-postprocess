@@ -68,7 +68,7 @@ def get_branch_progress(
             revision=branch_name,
             token=hf_token
         )
-        with open(state_file, "r", encoding="utf-8") as f:
+        with open(state_file, encoding="utf-8") as f:
             state = json.load(f)
 
         completed_epochs = float(state.get("epoch", 0.0))

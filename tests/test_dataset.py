@@ -1,3 +1,4 @@
+import re
 from unittest.mock import MagicMock
 
 import pytest
@@ -17,7 +18,7 @@ def mock_tokenizer():
         for tokens in batch_tokens:
             # Fake subword tokenization: [101] + token_ids + [102]
             ids = [101] + [1000 + i for i in range(len(tokens))] + [102]
-            w_ids = [None] + list(range(len(tokens))) + [None]
+            w_ids = [None, *list(range(len(tokens))), None]
             input_ids.append(ids)
             word_ids_per_batch.append(w_ids)
 
@@ -74,7 +75,7 @@ def test_load_and_prepare_dataset_invalid_tag_raises(mocker, mock_tokenizer):
     invalid_ds = Dataset.from_list([{"tokens": ["test"], "tags": ["INVALID_TAG_SCHEMA"]}])
     mocker.patch("latin_itn_training.dataset.load_dataset", return_value=DatasetDict({"train": invalid_ds}))
 
-    with pytest.raises(ValueError, match="Dataset contains tags not present in config.TAG_LIST"):
+    with pytest.raises(ValueError, match=re.escape("Dataset contains tags not present in config.TAG_LIST")):
         load_and_prepare_dataset(mock_tokenizer, "dummy/dataset")
 
 
@@ -106,7 +107,7 @@ def test_subtoken_label_alignment_multibyte_and_hyphens(mocker):
     ds_dict = DatasetDict({"train": Dataset.from_list([sample] * 20)})
     mocker.patch("latin_itn_training.dataset.load_dataset", return_value=ds_dict)
 
-    train_ds, test_ds = load_and_prepare_dataset(
+    train_ds, _test_ds = load_and_prepare_dataset(
         tokenizer=mock_tok,
         dataset_name="dummy/dataset",
     )
@@ -143,7 +144,7 @@ def test_sequence_length_filtering(mocker):
     class FakeBatchEncoding(dict):
         def word_ids(self, batch_index=0, *args, **kwargs):
             # 8 total subtokens
-            return [None] + list(range(6)) + [None]
+            return [None, *list(range(6)), None]
 
     def fake_tokenize(batch_tokens, **kwargs):
         return FakeBatchEncoding({

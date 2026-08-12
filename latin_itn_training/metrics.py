@@ -1,5 +1,4 @@
 from collections import Counter
-from typing import Dict, Tuple
 
 import numpy as np
 from sklearn.metrics import f1_score, precision_recall_fscore_support
@@ -12,7 +11,7 @@ def to_percentage(raw_val: float) -> float:
     return float(raw_val) * 100.0
 
 
-def _parse_tag(tag: str) -> Tuple[str, str]:
+def _parse_tag(tag: str) -> tuple[str, str]:
     """Extracts casing and punctuation components from a tag string."""
     parts = tag.split("_", 1)
     casing = parts[0] if parts else "LOWER"
@@ -20,7 +19,7 @@ def _parse_tag(tag: str) -> Tuple[str, str]:
     return casing, punct
 
 
-def compute_metrics(eval_pred) -> Dict[str, float]:
+def compute_metrics(eval_pred) -> dict[str, float]:
     """Computes overall accuracy, macro precision/recall/F1, split casing/punct metrics,
     and predicted vs. gold class distributions.
     """
@@ -41,7 +40,7 @@ def compute_metrics(eval_pred) -> Dict[str, float]:
                 flat_preds.append(ID2LABEL[pred])
                 flat_labels.append(ID2LABEL[label])
 
-    metrics: Dict[str, float] = {}
+    metrics: dict[str, float] = {}
 
     # Handle edge case where all labels are masked
     if not flat_labels:

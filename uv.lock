@@ -1112,15 +1112,15 @@ wheels = [
 
 [[package]]
 name = "latin-itn"
-version = "0.1.1"
+version = "0.1.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "torch" },
     { name = "transformers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/59/7c/688ff58e4ffc395d54f7390323592ca61ec530bb258e58948f803b1fd5f6/latin_itn-0.1.1.tar.gz", hash = "sha256:3c61e8626e5990062e1dc4e5a8a8795b039f1ebdd4a5e3ae81d9d8ccf01a10d1", size = 13664, upload-time = "2026-08-05T22:07:03.287Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/06/53/ad43192fa9032fda7a704e562f726ce82028226276bf68837ddac88cd532/latin_itn-0.1.6.tar.gz", hash = "sha256:f9f8f1b1957466c631d2928f6683c2082d44f4050107cbaf417c86e5094cfe81", size = 14133, upload-time = "2026-08-06T20:45:01.85Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b2/93/4419c59fe806a4b9cafa42defa100ae854368c0d09d09119ebce83dd8b0b/latin_itn-0.1.1-py3-none-any.whl", hash = "sha256:0f17b196ae50af3029211fb4af20f952e1d3487de5f3296814a7f60592a10ead", size = 10523, upload-time = "2026-08-05T22:07:02.049Z" },
+    { url = "https://files.pythonhosted.org/packages/e1/8d/38eb5ef3fc8855e2b42cfc1ebd079a9b843e34991cdcb3144a71cbf311ac/latin_itn-0.1.6-py3-none-any.whl", hash = "sha256:81cddbfa633486b02a8e69112801e940942e3d7923951be1f7f9d698b477e76a", size = 11039, upload-time = "2026-08-06T20:44:59.248Z" },
 ]
 
 [[package]]
@@ -1152,12 +1152,15 @@ dependencies = [
 [package.optional-dependencies]
 dev = [
     { name = "pytest" },
+    { name = "pytest-mock" },
     { name = "ruff" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "pytest" },
     { name = "pytest-mock" },
+    { name = "ruff" },
 ]
 
 [package.metadata]
@@ -1167,12 +1170,13 @@ requires-dist = [
     { name = "datasets", specifier = ">=2.12.0" },
     { name = "evaluate", specifier = ">=0.4.0" },
     { name = "huggingface-hub", specifier = ">=0.16.0" },
-    { name = "latin-itn", specifier = "==0.1.1" },
+    { name = "latin-itn", specifier = ">=0.1.6" },
     { name = "modal", specifier = ">=0.60.0" },
     { name = "numpy", specifier = ">=1.24.0" },
     { name = "pandas", specifier = ">=2.0.0" },
     { name = "protobuf" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
+    { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.15.1" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1.0" },
     { name = "scikit-learn", specifier = ">=1.2.0" },
     { name = "sentencepiece", specifier = ">=0.1.99" },
@@ -1183,7 +1187,11 @@ requires-dist = [
 provides-extras = ["dev"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest-mock", specifier = ">=3.15.1" }]
+dev = [
+    { name = "pytest", specifier = ">=7.0.0" },
+    { name = "pytest-mock", specifier = ">=3.15.1" },
+    { name = "ruff", specifier = ">=0.1.0" },
+]
 
 [[package]]
 name = "markdown-it-py"

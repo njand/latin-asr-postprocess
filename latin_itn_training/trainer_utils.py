@@ -6,9 +6,9 @@ from typing import Any
 
 import numpy as np
 import torch
-import torch.nn as nn
 from huggingface_hub import HfApi, hf_hub_download
 from latin_itn.models import get_model_and_tokenizer
+from torch import nn
 from transformers import (
     DataCollatorForTokenClassification,
     Trainer,
@@ -302,8 +302,8 @@ def publish_model_and_readme(
                 filename=filename,
                 local_dir=output_dir,
             )
-        except Exception:
-            pass
+        except Exception as e:
+            print("Failed to download local dir artifacts: %s", e)
 
     readme_path = os.path.join(output_dir, "README.md")
     with open(readme_path, "w", encoding="utf-8") as f:

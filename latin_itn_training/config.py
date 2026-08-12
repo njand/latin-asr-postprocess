@@ -22,7 +22,7 @@ TAG_LIST = [
 ]
 
 LABEL2ID = {tag: i for i, tag in enumerate(TAG_LIST)}
-ID2LABEL = {i: tag for i, tag in enumerate(TAG_LIST)}
+ID2LABEL = dict(enumerate(TAG_LIST))
 
 PUNCT_MAP = {
     "NONE": "",

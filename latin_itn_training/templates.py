@@ -82,8 +82,8 @@ def generate_final_readme(
     punct_acc_pct = to_percentage(raw_punct_acc)
 
     epoch_val = eval_results.get("epoch")
-    epoch_header = f" (Epoch {int(round(epoch_val))} - Best Checkpoint)" if epoch_val is not None else ""
-    epoch_text = f"Epoch {int(round(epoch_val))}" if epoch_val is not None else "the best checkpoint"
+    epoch_header = f" (Epoch {round(epoch_val)} - Best Checkpoint)" if epoch_val is not None else ""
+    epoch_text = f"Epoch {round(epoch_val)}" if epoch_val is not None else "the best checkpoint"
 
     return f"""---
 language:

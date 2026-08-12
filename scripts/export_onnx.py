@@ -24,7 +24,7 @@ import time
 from argparse import ArgumentParser
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 # Ensure project root (parent of scripts/) is in sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -99,8 +99,7 @@ class BenchmarkMetric:
 
 class ONNXExporter:
     """Handles PyTorch-to-ONNX conversion and quantization."""
-
-    ARCH_CONFIG_MAP = {
+    ARCH_CONFIG_MAP: ClassVar[dict] = {
         "avx2": AutoQuantizationConfig.avx2,
         "avx512": AutoQuantizationConfig.avx512,
         "arm64": AutoQuantizationConfig.arm64,

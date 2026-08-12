@@ -165,11 +165,7 @@ def run_pipeline(config: TrainingConfig | None = None):
 
     print("\n☁️ Syncing offline W&B runs to cloud...", flush=True)
     try:
-        subprocess.run(
-            ["wandb", "sync", "--sync-all"],
-            cwd=config.wandb_dir,
-            check=True,
-        )
+        subprocess.run(["wandb", "sync", "--sync-all"], cwd=config.wandb_dir, check=True)  # noqa: S607
         print("✅ W&B sync complete.", flush=True)
     except Exception as e:
         print(f"⚠️ W&B sync failed: {e}", flush=True)

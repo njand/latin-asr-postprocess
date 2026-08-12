@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "latin-itn-training"
 version = "0.1.0"
 description = "Train model for Inverse Text Normalization (casing and punctuation restoration) for Latin ASR outputs"
-authors = [{ name = "N. Jand" }]
+authors = [{ name = "Nathan Anderson" }]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -35,12 +35,45 @@ Issues = "https://github.com/njand/latin-asr-postprocess/issues"
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
-    "ruff>=0.1.0"
+    "pytest-mock>=3.15.1",
+    "ruff>=0.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-mock>=3.15.1",
+    "ruff>=0.1.0",
 ]
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # Pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "BLE",  # blind exceptions
+    "C4",   # comprehensions
+    "PLR",  # refactoring
+    "RUF",  # Ruff-specific
+    "S"     # Bandit security
+]
+ignore = [
+    "E501",    # Line length (handled better by code formatters / necessary for long prompt templates)
+    "PLR2004", # Magic values (PyTorch -100 loss mask is idiomatic)
+    "PLR0913", # Too many function arguments
+    "PLR0917", # Too many positional arguments
+    "PLR0915", # Too many statements
+    "BLE001"   # Do not catch blind exception (intentional for non-blocking CLI step fallbacks)
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Allow `assert` in all test files
+"tests/*" = ["S106", "S108", "S101", "PLR2004"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["latin_itn_training"]
@@ -51,8 +84,3 @@ testpaths = ["tests"]
 
 [tool.setuptools.packages.find]
 include = ["latin_itn_training*"]
-
-[dependency-groups]
-dev = [
-    "pytest-mock>=3.15.1",
-]

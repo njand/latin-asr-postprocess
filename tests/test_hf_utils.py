@@ -52,7 +52,7 @@ def test_get_branch_progress(mock_download, tmp_path):
     state_file.write_text(json.dumps(state_data), encoding="utf-8")
     mock_download.return_value = str(state_file)
 
-    completed_epochs, best_epoch, best_f1, best_acc, best_casing, best_punct = get_branch_progress(
+    completed_epochs, best_epoch, best_f1, best_acc, _best_casing, _best_punct = get_branch_progress(
         mock_api, "user/repo", "main", "fake_token"
     )
 

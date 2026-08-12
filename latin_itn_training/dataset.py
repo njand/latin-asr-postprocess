@@ -1,4 +1,4 @@
-from typing import Any, Dict, Tuple
+from typing import Any
 
 from datasets import DatasetDict, load_dataset
 
@@ -6,10 +6,10 @@ from latin_itn_training.config import LABEL2ID, MAX_LENGTH
 
 
 def tokenize_and_align_labels(
-    examples: Dict[str, Any],
+    examples: dict[str, Any],
     tokenizer: Any,
     max_length: int = MAX_LENGTH,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Tokenizes word sequences and aligns label tags to subtoken IDs."""
     tokenized_inputs = tokenizer(
         examples["tokens"],
@@ -47,7 +47,7 @@ def load_and_prepare_dataset(
     max_length: int = MAX_LENGTH,
     seed: int = 42,
     max_samples: int | None = None,
-) -> Tuple[Any, Any]:
+) -> tuple[Any, Any]:
     """Loads dataset, optionally subsamples for debugging, tokenizes & aligns labels,
     drops >max_length subtoken samples, and returns (train_ds, test_ds).
     """
@@ -68,7 +68,7 @@ def load_and_prepare_dataset(
         else (next(iter(raw_ds.values())) if isinstance(raw_ds, DatasetDict) else raw_ds)
     )
 
-    sample_tags = set(tag for sample in ds_train["tags"] for tag in sample)
+    sample_tags = {tag for sample in ds_train["tags"] for tag in sample}
     missing_tags = sample_tags - set(LABEL2ID.keys())
     if missing_tags:
         raise ValueError(

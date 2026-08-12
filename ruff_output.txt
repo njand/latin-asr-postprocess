@@ -1,0 +1,981 @@
+uv run ruff check --fix --unsafe-fixes .
+      Built latin-itn-training @ file:///home/njanders/Documents/code/latin-asr-postprocess
+Uninstalled 1 package in 0.38ms
+Installed 1 package in 0.36ms
+PLR0913 Too many arguments in function definition (7 > 5)
+  --> apps/train.py:47:5
+   |
+47 | def run_training_job(
+   |     ^^^^^^^^^^^^^^^^
+48 |     config: TrainingConfig,
+49 |     train_ds: Any,
+   |
+
+PLR0917 Too many positional arguments (7 > 5)
+  --> apps/train.py:47:5
+   |
+47 | def run_training_job(
+   |     ^^^^^^^^^^^^^^^^
+48 |     config: TrainingConfig,
+49 |     train_ds: Any,
+   |
+
+E501 Line too long (123 > 100)
+  --> apps/train.py:59:101
+   |
+58 |     print(
+59 |         f"\n{CLR_BOLD}{CLR_BG_MAGENTA} =================== STARTING TRAINING (95/5 SPLIT) =================== {CLR_RESET}",
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^
+60 |         flush=True,
+61 |     )
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+   --> apps/train.py:163:16
+    |
+161 |         try:
+162 |             tracker.stop()
+163 |         except Exception as e:
+    |                ^^^^^^^^^
+164 |             print(f"Failed to stop carbon tracker: {e}")
+    |
+
+S607 Starting a process with a partial executable path
+   --> apps/train.py:169:13
+    |
+167 |     try:
+168 |         subprocess.run(
+169 |             ["wandb", "sync", "--sync-all"],
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+170 |             cwd=config.wandb_dir,
+171 |             check=True,
+    |
+
+BLE001 Do not catch blind exception: `Exception`
+   --> apps/train.py:174:12
+    |
+172 |         )
+173 |         print("✅ W&B sync complete.", flush=True)
+174 |     except Exception as e:
+    |            ^^^^^^^^^
+175 |         print(f"⚠️ W&B sync failed: {e}", flush=True)
+    |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> apps/wipe_modal_cache.py:22:20
+   |
+20 |                 else:
+21 |                     os.remove(item_path)
+22 |             except Exception as e:
+   |                    ^^^^^^^^^
+23 |                 print(f"Could not remove {item_path}: {e}")
+   |
+
+PLR0913 Too many arguments in function definition (6 > 5)
+  --> latin_itn_training/dataset.py:43:5
+   |
+43 | def load_and_prepare_dataset(
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+44 |     tokenizer: Any,
+45 |     dataset_name: str,
+   |
+
+PLR0917 Too many positional arguments (6 > 5)
+  --> latin_itn_training/dataset.py:43:5
+   |
+43 | def load_and_prepare_dataset(
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+44 |     tokenizer: Any,
+45 |     dataset_name: str,
+   |
+
+E501 Line too long (104 > 100)
+   --> latin_itn_training/dataset.py:108:101
+    |
+106 |         filtered_ds["train"]
+107 |         if isinstance(filtered_ds, DatasetDict) and "train" in filtered_ds
+108 |         else (next(iter(filtered_ds.values())) if isinstance(filtered_ds, DatasetDict) else filtered_ds)
+    |                                                                                                     ^^^^
+109 |     )
+110 |     dropped = initial_count - len(train_filtered)
+    |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> latin_itn_training/hf_utils.py:13:12
+   |
+11 |     try:
+12 |         api.create_branch(repo_id=repo_id, branch=branch_name, exist_ok=True)
+13 |     except Exception as e:
+   |            ^^^^^^^^^
+14 |         print(f"Warning: Could not verify/create branch '{branch_name}': {e}", flush=True)
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> latin_itn_training/hf_utils.py:96:12
+   |
+95 |         return completed_epochs, best_epoch, best_f1, best_acc, best_casing_acc, best_punct_acc
+96 |     except Exception as e:
+   |            ^^^^^^^^^
+97 |         print(f"Notice: Could not retrieve state for branch '{branch_name}': {e}", flush=True)
+98 |         return 0.0, None, 0.0, 0.0, 0.0, 0.0
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `-100` with a constant variable
+  --> latin_itn_training/metrics.py:39:25
+   |
+37 |     for pred_seq, label_seq in zip(predictions, labels):
+38 |         for pred, label in zip(pred_seq, label_seq):
+39 |             if label != -100:
+   |                         ^^^^
+40 |                 flat_preds.append(ID2LABEL[pred])
+41 |                 flat_labels.append(ID2LABEL[label])
+   |
+
+PLR0913 Too many arguments in function definition (7 > 5)
+  --> latin_itn_training/templates.py:53:5
+   |
+53 | def generate_final_readme(
+   |     ^^^^^^^^^^^^^^^^^^^^^
+54 |     base_model: str,
+55 |     dataset_name: str,
+   |
+
+PLR0917 Too many positional arguments (7 > 5)
+  --> latin_itn_training/templates.py:53:5
+   |
+53 | def generate_final_readme(
+   |     ^^^^^^^^^^^^^^^^^^^^^
+54 |     base_model: str,
+55 |     dataset_name: str,
+   |
+
+E501 Line too long (110 > 100)
+  --> latin_itn_training/templates.py:68:101
+   |
+66 |     raw_f1 = float(eval_results.get("eval_overall_f1", 0.0))
+67 |     raw_acc = float(eval_results.get("eval_overall_accuracy", 0.0))
+68 |     raw_precision = float(eval_results.get("eval_overall_precision", eval_results.get("eval_precision", 0.0)))
+   |                                                                                                     ^^^^^^^^^^
+69 |     raw_recall = float(eval_results.get("eval_overall_recall", eval_results.get("eval_recall", 0.0)))
+70 |     val_loss = float(eval_results.get("eval_loss", 0.0))
+   |
+
+E501 Line too long (101 > 100)
+  --> latin_itn_training/templates.py:69:101
+   |
+67 |     raw_acc = float(eval_results.get("eval_overall_accuracy", 0.0))
+68 |     raw_precision = float(eval_results.get("eval_overall_precision", eval_results.get("eval_precision", 0.0)))
+69 |     raw_recall = float(eval_results.get("eval_overall_recall", eval_results.get("eval_recall", 0.0)))
+   |                                                                                                     ^
+70 |     val_loss = float(eval_results.get("eval_loss", 0.0))
+   |
+
+E501 Line too long (309 > 100)
+   --> latin_itn_training/templates.py:133:101
+    |
+131 | …
+132 | …
+133 | …tin Automatic Speech Recognition (ASR) outputs into fully formatted, classical Latin text. It simultaneously restores capitalization and trailing punctuation using a **14-class composite sequence labeling schema**.
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+134 | …
+135 | …
+    |
+
+E501 Line too long (237 > 100)
+   --> latin_itn_training/templates.py:149:101
+    |
+147 | …s-r-latin`](https://huggingface.co/njand/wav2vec2-xls-r-latin).
+148 | …
+149 | …nctuated), the text must pass through an input normalization pipeline before being fed into this model for casing and punctuation restoration.
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+150 | …
+151 | …
+    |
+
+E501 Line too long (101 > 100)
+   --> latin_itn_training/templates.py:152:101
+    |
+151 | ```text
+152 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |                                                                                                     ^
+153 | |  Raw Audio Waveform   | --> |  njand/wav2vec2-xls-r-latin   | --> | Preprocessing & Normalization |
+154 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |
+
+E501 Line too long (101 > 100)
+   --> latin_itn_training/templates.py:153:101
+    |
+151 | ```text
+152 | +-----------------------+     +-------------------------------+     +-------------------------------+
+153 | |  Raw Audio Waveform   | --> |  njand/wav2vec2-xls-r-latin   | --> | Preprocessing & Normalization |
+    |                                                                                                     ^
+154 | +-----------------------+     +-------------------------------+     +-------------------------------+
+155 |                                                                                     |
+    |
+
+E501 Line too long (101 > 100)
+   --> latin_itn_training/templates.py:154:101
+    |
+152 | +-----------------------+     +-------------------------------+     +-------------------------------+
+153 | |  Raw Audio Waveform   | --> |  njand/wav2vec2-xls-r-latin   | --> | Preprocessing & Normalization |
+154 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |                                                                                                     ^
+155 |                                                                                     |
+156 |                                                                                     v
+    |
+
+E501 Line too long (101 > 100)
+   --> latin_itn_training/templates.py:157:101
+    |
+155 |                                                                                     |
+156 |                                                                                     v
+157 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |                                                                                                     ^
+158 | | Formatted Text Output | <-- |   Latin ASR Post-Processor    | <-- |   Custom CLTK Tokenization     |
+159 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |
+
+E501 Line too long (102 > 100)
+   --> latin_itn_training/templates.py:158:101
+    |
+156 |                                                                                     v
+157 | +-----------------------+     +-------------------------------+     +-------------------------------+
+158 | | Formatted Text Output | <-- |   Latin ASR Post-Processor    | <-- |   Custom CLTK Tokenization     |
+    |                                                                                                     ^^
+159 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |
+
+E501 Line too long (101 > 100)
+   --> latin_itn_training/templates.py:159:101
+    |
+157 | +-----------------------+     +-------------------------------+     +-------------------------------+
+158 | | Formatted Text Output | <-- |   Latin ASR Post-Processor    | <-- |   Custom CLTK Tokenization     |
+159 | +-----------------------+     +-------------------------------+     +-------------------------------+
+    |                                                                                                     ^
+160 |
+161 | ```
+    |
+
+E501 Line too long (108 > 100)
+   --> latin_itn_training/templates.py:167:101
+    |
+165 | To prepare raw transcript outputs for inference, apply the following sequence of transformations:
+166 |
+167 | 1. **Macron Stripping:** Remove all vowel length diacritics (e.g., *ā, ē, ī, ō, ū, ȳ* → *a, e, i, o, u, y*).
+    |                                                                                                     ^^^^^^^^
+168 | 2. **Orthographic Standardization:** Standardize consonant/vowel variants:
+169 | * Convert *j* → *i* and *v* → *u*.
+    |
+
+E501 Line too long (211 > 100)
+   --> latin_itn_training/templates.py:173:101
+    |
+173 | …*[CLTK (Classical Language Toolkit v0)](https://github.com/cltk/cltk/tree/v0/cltk/tokenize/latin)** Latin word tokenizer.
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+174 | …entation of the tokenizer was executed dynamically during training preprocessing rather than being pre-applied to the static dataset.
+    |
+
+E501 Line too long (223 > 100)
+   --> latin_itn_training/templates.py:174:101
+    |
+173 | …K (Classical Language Toolkit v0)](https://github.com/cltk/cltk/tree/v0/cltk/tokenize/latin)** Latin word tokenizer.
+174 | …ion of the tokenizer was executed dynamically during training preprocessing rather than being pre-applied to the static dataset.
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+E501 Line too long (131 > 100)
+   --> latin_itn_training/templates.py:182:101
+    |
+180 | ## 🚀 Quickstart & Inference Utility
+181 |
+182 | Below is a complete Python script demonstrating how to prepare raw ASR output and run inference using the post-processing pipeline.
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+183 |
+184 | ```python
+    |
+
+E501 Line too long (119 > 100)
+   --> latin_itn_training/templates.py:239:101
+    |
+237 | ## 🏷️ Composite Label Schema
+238 |
+239 | Target labels utilize a **14-class composite sequence schema** that pairs Casing state with Trailing Punctuation state:
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^
+240 |
+241 | $$\text{{Label}} = \text{{Casing}} \times \text{{Punctuation}}$$
+    |
+
+E501 Line too long (102 > 100)
+   --> latin_itn_training/templates.py:244:101
+    |
+243 | * **Casing Tags (2):** `LOWER`, `TITLE`
+244 | * **Punctuation Tags (7):** `NONE`, `COMMA`, `PERIOD`, `SEMICOLON`, `COLON`, `QUESTION`, `EXCLAMATION`
+    |                                                                                                     ^^
+245 |
+246 | ---
+    |
+
+E501 Line too long (103 > 100)
+   --> latin_itn_training/templates.py:250:101
+    |
+248 | ## 📊 Benchmarks & Performance{epoch_header}
+249 |
+250 | Evaluated on a 95/5 train/holdout split across diverse Classical Latin literary and historical corpora.
+    |                                                                                                     ^^^
+251 |
+252 | ### Overall Summary Metrics
+    |
+
+E501 Line too long (195 > 100)
+   --> latin_itn_training/templates.py:273:101
+    |
+271 | …
+272 | …
+273 | …ps://huggingface.co/%7Bbase_model%7D). Model weights from {epoch_text} were selected based on optimal overall F1.
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+274 | …
+275 | …
+    |
+
+E501 Line too long (115 > 100)
+  --> latin_itn_training/trainer_utils.py:86:101
+   |
+84 |             step_fmt = f"{CLR_CYAN}{current_step:>{step_width}d}/{total_steps}{CLR_RESET}"
+85 |             loss_fmt = f"Loss {CLR_YELLOW}{loss_raw}{CLR_RESET}"
+86 |             time_fmt = f"{CLR_DIM}{self._format_time(elapsed):>7} < ETA {self._format_time(eta_sec):>7}{CLR_RESET}"
+   |                                                                                                     ^^^^^^^^^^^^^^^
+87 |
+88 |             print(
+   |
+
+E501 Line too long (129 > 100)
+   --> latin_itn_training/trainer_utils.py:150:100
+    |
+149 | …     lines = [
+150 | …         f"\n{CLR_BOLD}{CLR_CYAN}📊 [Eval Epoch {epoch:.1f}]{CLR_RESET} Val Loss: {CLR_YELLOW}{eval_loss:.4f}{CLR_RESET}",
+    |                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+151 | …         f"  ├─ {CLR_BOLD}Overall Metrics:{CLR_RESET}",
+152 | …         f"  │    Macro F1: {CLR_BOLD}{f1:5.2f}%{CLR_RESET}  │  Acc: {CLR_BOLD}{acc:5.2f}%{CLR_RESET}  │  Prec: {prec:5.2f}%  │  Rec…
+    |
+
+E501 Line too long (154 > 100)
+   --> latin_itn_training/trainer_utils.py:152:101
+    |
+150 | …:.1f}]{CLR_RESET} Val Loss: {CLR_YELLOW}{eval_loss:.4f}{CLR_RESET}",
+151 | …,
+152 | …ESET}  │  Acc: {CLR_BOLD}{acc:5.2f}%{CLR_RESET}  │  Prec: {prec:5.2f}%  │  Rec: {rec:5.2f}%",
+    |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+153 | …SET}",
+154 | …1:5.2f}%{CLR_RESET}  │  Acc: {case_acc:5.2f}%",
+    |
+
+E501 Line too long (108 > 100)
+   --> latin_itn_training/trainer_utils.py:154:101
+    |
+152 | …         f"  │    Macro F1: {CLR_BOLD}{f1:5.2f}%{CLR_RESET}  │  Acc: {CLR_BOLD}{acc:5.2f}%{CLR_RESET}  │  Prec: {prec:5.2f}%  │  Rec…
+153 | …         f"  ├─ {CLR_BOLD}Sub-Task Performance:{CLR_RESET}",
+154 | …         f"  │    Casing (TITLE F1): {CLR_BOLD}{case_f1:5.2f}%{CLR_RESET}  │  Acc: {case_acc:5.2f}%",
+    |                                                                                               ^^^^^^^^
+155 | …         f"  │    Punct  (Macro F1): {CLR_BOLD}{punct_f1:5.2f}%{CLR_RESET}  │  Acc: {punct_acc:5.2f}%",
+156 | …     ]
+    |
+
+E501 Line too long (110 > 100)
+   --> latin_itn_training/trainer_utils.py:155:101
+    |
+153 |                 f"  ├─ {CLR_BOLD}Sub-Task Performance:{CLR_RESET}",
+154 |                 f"  │    Casing (TITLE F1): {CLR_BOLD}{case_f1:5.2f}%{CLR_RESET}  │  Acc: {case_acc:5.2f}%",
+155 |                 f"  │    Punct  (Macro F1): {CLR_BOLD}{punct_f1:5.2f}%{CLR_RESET}  │  Acc: {punct_acc:5.2f}%",
+    |                                                                                                     ^^^^^^^^^^
+156 |             ]
+    |
+
+E501 Line too long (114 > 100)
+   --> latin_itn_training/trainer_utils.py:173:101
+    |
+172 |                     lines.append(
+173 |                         f"        • {label:<16} Pred: {CLR_BOLD}{p_pct:5.2f}%{CLR_RESET} │ Gold: {g_pct:5.2f}% │ "
+    |                                                                                                     ^^^^^^^^^^^^^^
+174 |                         f"Diff: {diff_color}{diff_sign}{diff:5.2f}%{CLR_RESET} [{tag}]"
+175 |                     )
+    |
+
+E501 Line too long (114 > 100)
+   --> latin_itn_training/trainer_utils.py:178:101
+    |
+176 |                 if remaining_count > 0:
+177 |                     lines.append(
+178 |                         f"        {CLR_CYAN}└─ ... and {remaining_count} other classes logged to WandB{CLR_RESET}"
+    |                                                                                                     ^^^^^^^^^^^^^^
+179 |                     )
+180 |             else:
+    |
+
+E501 Line too long (106 > 100)
+   --> latin_itn_training/trainer_utils.py:201:101
+    |
+199 |                 },
+200 |                 {
+201 |                     "params": [p for n, p in self.model.classifier.named_parameters() if p.requires_grad],
+    |                                                                                                     ^^^^^^
+202 |                     "lr": getattr(self.args, "classifier_learning_rate", 1e-3),
+203 |                 },
+    |
+
+PLR0913 Too many arguments in function definition (7 > 5)
+   --> latin_itn_training/trainer_utils.py:226:5
+    |
+226 | def build_training_args(
+    |     ^^^^^^^^^^^^^^^^^^^
+227 |     output_dir: str,
+228 |     config: TrainingConfig,
+    |
+
+PLR0917 Too many positional arguments (7 > 5)
+   --> latin_itn_training/trainer_utils.py:226:5
+    |
+226 | def build_training_args(
+    |     ^^^^^^^^^^^^^^^^^^^
+227 |     output_dir: str,
+228 |     config: TrainingConfig,
+    |
+
+PLR0913 Too many arguments in function definition (8 > 5)
+   --> latin_itn_training/trainer_utils.py:278:5
+    |
+278 | def publish_model_and_readme(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^
+279 |     trainer: Trainer,
+280 |     api: HfApi,
+    |
+
+PLR0917 Too many positional arguments (8 > 5)
+   --> latin_itn_training/trainer_utils.py:278:5
+    |
+278 | def publish_model_and_readme(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^
+279 |     trainer: Trainer,
+280 |     api: HfApi,
+    |
+
+S110 `try`-`except`-`pass` detected, consider logging the exception
+   --> latin_itn_training/trainer_utils.py:305:9
+    |
+303 |                   local_dir=output_dir,
+304 |               )
+305 | /         except Exception:
+306 | |             pass
+    | |________________^
+307 |
+308 |       readme_path = os.path.join(output_dir, "README.md")
+    |
+
+BLE001 Do not catch blind exception: `Exception`
+   --> latin_itn_training/trainer_utils.py:305:16
+    |
+303 |                 local_dir=output_dir,
+304 |             )
+305 |         except Exception:
+    |                ^^^^^^^^^
+306 |             pass
+    |
+
+BLE001 Do not catch blind exception: `Exception`
+   --> latin_itn_training/trainer_utils.py:339:12
+    |
+338 |         return f"{total_duration_sec / 3600.0:.2f} hours", f"{total_emissions_kg:.4f} kg CO2eq"
+339 |     except Exception:
+    |            ^^^^^^^^^
+340 |         return "N/A", "N/A"
+    |
+
+PLR0913 Too many arguments in function definition (14 > 5)
+   --> latin_itn_training/trainer_utils.py:343:5
+    |
+343 | def execute_training_step(
+    |     ^^^^^^^^^^^^^^^^^^^^^
+344 |     config: TrainingConfig,
+345 |     branch_name: str,
+    |
+
+PLR0917 Too many positional arguments (14 > 5)
+   --> latin_itn_training/trainer_utils.py:343:5
+    |
+343 | def execute_training_step(
+    |     ^^^^^^^^^^^^^^^^^^^^^
+344 |     config: TrainingConfig,
+345 |     branch_name: str,
+    |
+
+PLR0915 Too many statements (51 > 50)
+   --> latin_itn_training/trainer_utils.py:343:5
+    |
+343 | def execute_training_step(
+    |     ^^^^^^^^^^^^^^^^^^^^^
+344 |     config: TrainingConfig,
+345 |     branch_name: str,
+    |
+
+E501 Line too long (111 > 100)
+   --> latin_itn_training/trainer_utils.py:372:101
+    |
+371 |     ensure_branch_exists(api, config.hf_repo_id, branch_name)
+372 |     completed_epochs, best_epoch, saved_f1, saved_acc, saved_casing_acc, saved_punct_acc = get_branch_progress(
+    |                                                                                                     ^^^^^^^^^^^
+373 |         api, config.hf_repo_id, branch_name, hf_token
+374 |     )
+    |
+
+E501 Line too long (109 > 100)
+   --> latin_itn_training/trainer_utils.py:388:101
+    |
+387 |     resume_ckpt = get_latest_checkpoint(output_dir)
+388 |     model_checkpoint = config.hf_repo_id if (completed_epochs > 0 and not resume_ckpt) else config.base_model
+    |                                                                                                     ^^^^^^^^^
+389 |     revision_target = branch_name if (completed_epochs > 0 and not resume_ckpt) else None
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `-100` with a constant variable
+   --> latin_itn_training/trainer_utils.py:413:92
+    |
+411 |     )
+412 |
+413 |     all_labels = [label for example in train_ds["labels"] for label in example if label != -100]
+    |                                                                                            ^^^^
+414 |     counts = Counter(all_labels)
+415 |     total_samples = sum(counts.values())
+    |
+
+E501 Line too long (106 > 100)
+   --> latin_itn_training/trainer_utils.py:469:101
+    |
+467 |     )
+468 |
+469 |     _, updated_best_epoch, _, _, _, _ = get_branch_progress(api, config.hf_repo_id, branch_name, hf_token)
+    |                                                                                                     ^^^^^^
+470 |
+471 |     if wandb.run is not None:
+    |
+
+RUF012 Mutable default value for class attribute
+   --> scripts/export_onnx.py:103:23
+    |
+101 |       """Handles PyTorch-to-ONNX conversion and quantization."""
+102 |
+103 |       ARCH_CONFIG_MAP = {
+    |  _______________________^
+104 | |         "avx2": AutoQuantizationConfig.avx2,
+105 | |         "avx512": AutoQuantizationConfig.avx512,
+106 | |         "arm64": AutoQuantizationConfig.arm64,
+107 | |     }
+    | |_____^
+108 |
+109 |       def __init__(self, config: PipelineConfig):
+    |
+help: Consider initializing in `__init__` or annotating with `typing.ClassVar`
+
+BLE001 Do not catch blind exception: `Exception`
+   --> scripts/export_onnx.py:131:16
+    |
+129 |         try:
+130 |             tokenizer.save_pretrained(self.config.output_dir)
+131 |         except Exception as e:
+    |                ^^^^^^^^^
+132 |             logger.warning("Skipped saving tokenizer artifacts to %s: %s", self.config.output_dir, e)
+    |
+
+E501 Line too long (101 > 100)
+   --> scripts/export_onnx.py:132:101
+    |
+130 |             tokenizer.save_pretrained(self.config.output_dir)
+131 |         except Exception as e:
+132 |             logger.warning("Skipped saving tokenizer artifacts to %s: %s", self.config.output_dir, e)
+    |                                                                                                     ^
+133 |
+134 |         fp32_path = self.config.output_dir / "model.onnx"
+    |
+
+PLR0915 Too many statements (55 > 50)
+   --> scripts/export_onnx.py:203:9
+    |
+201 |         return inputs, label_ids
+202 |
+203 |     def _evaluate_model_variant(
+    |         ^^^^^^^^^^^^^^^^^^^^^^^
+204 |         self,
+205 |         label: str,
+    |
+
+E501 Line too long (139 > 100)
+   --> scripts/export_onnx.py:345:101
+    |
+343 | …ts")
+344 | …
+345 | … P95 Lat | P99 Lat | Throughput | Overall Acc | Overall F1 | Casing F1 | Punct F1 |")
+    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+346 | …| :---: | :---: | :---: | :---: | :---: | :---: |")
+347 | …
+    |
+
+E501 Line too long (105 > 100)
+   --> scripts/export_onnx.py:346:101
+    |
+344 | …     print("=" * 105)
+345 | …     print("| Variant | Size | Mean Lat | P50 Lat | P95 Lat | P99 Lat | Throughput | Overall Acc | Overall F1 | Casing F1 | Punct F1…
+346 | …     print("| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |")
+    |                                                                                                   ^^^^^
+347 | …     for r in results:
+348 | …         print(r.to_markdown_row())
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `-100` with a constant variable
+  --> tests/test_dataset.py:67:32
+   |
+66 |     sample_labels = train_ds[0]["labels"]
+67 |     assert sample_labels[0] == -100
+   |                                ^^^^
+68 |     assert sample_labels[-1] == -100
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `-100` with a constant variable
+  --> tests/test_dataset.py:68:33
+   |
+66 |     sample_labels = train_ds[0]["labels"]
+67 |     assert sample_labels[0] == -100
+68 |     assert sample_labels[-1] == -100
+   |                                 ^^^^
+
+E501 Line too long (108 > 100)
+  --> tests/test_dataset.py:75:101
+   |
+73 |     from datasets import Dataset, DatasetDict
+74 |     invalid_ds = Dataset.from_list([{"tokens": ["test"], "tags": ["INVALID_TAG_SCHEMA"]}])
+75 |     mocker.patch("latin_itn_training.dataset.load_dataset", return_value=DatasetDict({"train": invalid_ds}))
+   |                                                                                                     ^^^^^^^^
+76 |
+77 |     with pytest.raises(ValueError, match="Dataset contains tags not present in config.TAG_LIST"):
+   |
+
+RUF043 Pattern passed to `match=` contains metacharacters but is neither escaped nor raw
+  --> tests/test_dataset.py:77:42
+   |
+75 |     mocker.patch("latin_itn_training.dataset.load_dataset", return_value=DatasetDict({"train": invalid_ds}))
+76 |
+77 |     with pytest.raises(ValueError, match="Dataset contains tags not present in config.TAG_LIST"):
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+78 |         load_and_prepare_dataset(mock_tokenizer, "dummy/dataset")
+   |
+help: Use a raw string or `re.escape()` to make the intention explicit
+
+PLR2004 Magic value used in comparison, consider replacing `-100` with a constant variable
+   --> tests/test_dataset.py:116:25
+    |
+114 |     # Subtoken 0 gets tag ID, subtoken 1 (tail) gets -100
+115 |     labels = train_ds[0]["labels"]
+116 |     assert labels[1] != -100  # First subtoken gets actual label ID
+    |                         ^^^^
+117 |     assert labels[2] == -100  # Tail subtoken masked out
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `-100` with a constant variable
+   --> tests/test_dataset.py:117:25
+    |
+115 |     labels = train_ds[0]["labels"]
+116 |     assert labels[1] != -100  # First subtoken gets actual label ID
+117 |     assert labels[2] == -100  # Tail subtoken masked out
+    |                         ^^^^
+
+PLR2004 Magic value used in comparison, consider replacing `10` with a constant variable
+   --> tests/test_dataset.py:135:44
+    |
+134 |     # Total loaded samples should not exceed max_samples (10 split into ~9 train / 1 test)
+135 |     assert len(train_ds) + len(test_ds) == 10
+    |                                            ^^
+
+E501 Line too long (114 > 100)
+   --> tests/test_dataset.py:197:101
+    |
+196 | def test_single_dataset_input_fallback(mocker, mock_tokenizer):
+197 |     """Verify dataset processing functions correctly when load_dataset returns a raw Dataset (not DatasetDict)."""
+    |                                                                                                     ^^^^^^^^^^^^^^
+198 |     from datasets import Dataset
+    |
+
+E501 Line too long (101 > 100)
+  --> tests/test_hf_utils.py:14:101
+   |
+12 |     mock_api = MagicMock()
+13 |     ensure_branch_exists(mock_api, "user/repo", "main")
+14 |     mock_api.create_branch.assert_called_once_with(repo_id="user/repo", branch="main", exist_ok=True)
+   |                                                                                                     ^
+
+E501 Line too long (101 > 100)
+  --> tests/test_hf_utils.py:55:101
+   |
+53 |     mock_download.return_value = str(state_file)
+54 |
+55 |     completed_epochs, best_epoch, best_f1, best_acc, _best_casing, _best_punct = get_branch_progress(
+   |                                                                                                     ^
+56 |         mock_api, "user/repo", "main", "fake_token"
+57 |     )
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `2.0` with a constant variable
+  --> tests/test_hf_utils.py:59:32
+   |
+57 |     )
+58 |
+59 |     assert completed_epochs == 2.0
+   |                                ^^^
+60 |     assert best_epoch == 1.0
+61 |     assert best_f1 == 80.0
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `80.0` with a constant variable
+  --> tests/test_hf_utils.py:61:23
+   |
+59 |     assert completed_epochs == 2.0
+60 |     assert best_epoch == 1.0
+61 |     assert best_f1 == 80.0
+   |                       ^^^^
+62 |     assert best_acc == 85.0
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `85.0` with a constant variable
+  --> tests/test_hf_utils.py:62:24
+   |
+60 |     assert best_epoch == 1.0
+61 |     assert best_f1 == 80.0
+62 |     assert best_acc == 85.0
+   |                        ^^^^
+
+E501 Line too long (111 > 100)
+  --> tests/test_metrics.py:50:101
+   |
+49 | def test_compute_metrics_single_class_zero_division():
+50 |     """Ensure precision/recall/F1 calculations handle unpredicted/absent classes without raising NaN errors."""
+   |                                                                                                     ^^^^^^^^^^^
+51 |     # Label set only contains LOWER_NONE (0); TITLE_PERIOD (1) never appears
+52 |     predictions = np.array([
+   |
+
+E501 Line too long (111 > 100)
+  --> tests/test_metrics.py:65:101
+   |
+64 | def test_compute_metrics_all_ignored_labels():
+65 |     """Ensure evaluation on a sequence where all tokens are -100 (e.g., special tokens only) handles safely."""
+   |                                                                                                     ^^^^^^^^^^^
+66 |     predictions = np.array([
+67 |         [[0.5, 0.5], [0.5, 0.5]],
+   |
+
+E501 Line too long (104 > 100)
+   --> tests/test_metrics.py:164:101
+    |
+162 |         ("LOWER_NONE", "LOWER", "NONE"),
+163 |         ("TITLE", "TITLE", "NONE"),                         # No underscore fallback
+164 |         ("LOWER_PERIOD_EXTRA", "LOWER", "PERIOD_EXTRA"),    # split("_", 1) retains trailing underscores
+    |                                                                                                     ^^^^
+165 |     ],
+166 | )
+    |
+
+S108 Probable insecure usage of temporary file or directory: "/tmp/test_out"
+   --> tests/test_trainer_utils.py:100:20
+    |
+ 98 | def test_build_training_args(mock_training_args, mock_training_config):
+ 99 |     build_training_args(
+100 |         output_dir="/tmp/test_out",
+    |                    ^^^^^^^^^^^^^^^
+101 |         config=mock_training_config,
+102 |         num_epochs=3,
+    |
+
+S106 Possible hardcoded password assigned to argument: "hf_token"
+   --> tests/test_trainer_utils.py:104:9
+    |
+102 |         num_epochs=3,
+103 |         branch_name="main",
+104 |         hf_token="fake_token",
+    |         ^^^^^^^^^^^^^^^^^^^^^
+105 |         run_name="test_run",
+106 |         is_eval_enabled=True,
+    |
+
+S108 Probable insecure usage of temporary file or directory: "/tmp/out"
+   --> tests/test_trainer_utils.py:196:20
+    |
+194 |         run_name="itn_run",
+195 |         target_epochs=5,
+196 |         output_dir="/tmp/out",
+    |                    ^^^^^^^^^^
+197 |         train_ds={"labels": [[0, 1, -100]]},
+198 |         eval_ds=MagicMock(),
+    |
+
+S106 Possible hardcoded password assigned to argument: "hf_token"
+   --> tests/test_trainer_utils.py:203:9
+    |
+201 |         callbacks=[],
+202 |         api=mock_api,
+203 |         hf_token="fake_token",
+    |         ^^^^^^^^^^^^^^^^^^^^^
+204 |         readme_content_fn=lambda t, e: "readme",
+205 |         commit_message="Finished",
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `4.0` with a constant variable
+   --> tests/test_trainer_utils.py:209:36
+    |
+208 |     assert result["completed_previously"] is True
+209 |     assert result["best_epoch"] == 4.0
+    |                                    ^^^
+210 |     assert result["f1"] == 88.5
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `88.5` with a constant variable
+   --> tests/test_trainer_utils.py:210:28
+    |
+208 |     assert result["completed_previously"] is True
+209 |     assert result["best_epoch"] == 4.0
+210 |     assert result["f1"] == 88.5
+    |                            ^^^^
+
+E501 Line too long (108 > 100)
+   --> tests/test_trainer_utils.py:216:101
+    |
+214 | @patch("wandb.finish")
+215 | @patch("latin_itn_training.trainer_utils.get_latest_checkpoint", return_value=None)
+216 | @patch("latin_itn_training.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
+    |                                                                                                     ^^^^^^^^
+217 | @patch("latin_itn_training.trainer_utils.ensure_branch_exists")
+218 | @patch("latin_itn_training.trainer_utils.get_model_and_tokenizer")
+    |
+
+PLR0913 Too many arguments in function definition (9 > 5)
+   --> tests/test_trainer_utils.py:221:5
+    |
+219 | @patch("latin_itn_training.trainer_utils.WeightedITNTrainer")
+220 | @patch("latin_itn_training.trainer_utils.publish_model_and_readme")
+221 | def test_execute_training_step_full_run(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+222 |     mock_publish,
+223 |     mock_trainer_cls,
+    |
+
+PLR0917 Too many positional arguments (9 > 5)
+   --> tests/test_trainer_utils.py:221:5
+    |
+219 | @patch("latin_itn_training.trainer_utils.WeightedITNTrainer")
+220 | @patch("latin_itn_training.trainer_utils.publish_model_and_readme")
+221 | def test_execute_training_step_full_run(
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+222 |     mock_publish,
+223 |     mock_trainer_cls,
+    |
+
+S108 Probable insecure usage of temporary file or directory: "/tmp/out"
+   --> tests/test_trainer_utils.py:256:20
+    |
+254 |         run_name="itn_run",
+255 |         target_epochs=1,
+256 |         output_dir="/tmp/out",
+    |                    ^^^^^^^^^^
+257 |         train_ds={"labels": [[0, 1, -100]]},
+258 |         eval_ds=MagicMock(),
+    |
+
+S106 Possible hardcoded password assigned to argument: "hf_token"
+   --> tests/test_trainer_utils.py:263:9
+    |
+261 |         callbacks=[],
+262 |         api=mock_api,
+263 |         hf_token="fake_token",
+    |         ^^^^^^^^^^^^^^^^^^^^^
+264 |         readme_content_fn=lambda t, e: "generated readme",
+265 |         commit_message="Finished ITN run",
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `85.0` with a constant variable
+   --> tests/test_trainer_utils.py:272:28
+    |
+271 |     assert result["completed_previously"] is False
+272 |     assert result["f1"] == 85.0
+    |                            ^^^^
+273 |     assert result["acc"] == 90.0
+274 |     assert result["casing_acc"] == 95.0
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `90.0` with a constant variable
+   --> tests/test_trainer_utils.py:273:29
+    |
+271 |     assert result["completed_previously"] is False
+272 |     assert result["f1"] == 85.0
+273 |     assert result["acc"] == 90.0
+    |                             ^^^^
+274 |     assert result["casing_acc"] == 95.0
+275 |     assert result["punct_acc"] == 92.0
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `95.0` with a constant variable
+   --> tests/test_trainer_utils.py:274:36
+    |
+272 |     assert result["f1"] == 85.0
+273 |     assert result["acc"] == 90.0
+274 |     assert result["casing_acc"] == 95.0
+    |                                    ^^^^
+275 |     assert result["punct_acc"] == 92.0
+    |
+
+PLR2004 Magic value used in comparison, consider replacing `92.0` with a constant variable
+   --> tests/test_trainer_utils.py:275:35
+    |
+273 |     assert result["acc"] == 90.0
+274 |     assert result["casing_acc"] == 95.0
+275 |     assert result["punct_acc"] == 92.0
+    |                                   ^^^^
+
+E501 Line too long (117 > 100)
+   --> tests/test_trainer_utils.py:286:101
+    |
+284 |     mocker.patch("wandb.finish")
+285 |     mocker.patch("latin_itn_training.trainer_utils.WeightedITNTrainer", return_value=mock_trainer)
+286 |     mocker.patch("latin_itn_training.trainer_utils.get_model_and_tokenizer", return_value=(MagicMock(), MagicMock()))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^
+287 |     mocker.patch("latin_itn_training.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
+288 |     mocker.patch("latin_itn_training.trainer_utils.ensure_branch_exists")
+    |
+
+E501 Line too long (118 > 100)
+   --> tests/test_trainer_utils.py:287:101
+    |
+285 |     mocker.patch("latin_itn_training.trainer_utils.WeightedITNTrainer", return_value=mock_trainer)
+286 |     mocker.patch("latin_itn_training.trainer_utils.get_model_and_tokenizer", return_value=(MagicMock(), MagicMock()))
+287 |     mocker.patch("latin_itn_training.trainer_utils.get_branch_progress", return_value=(0.0, None, 0.0, 0.0, 0.0, 0.0))
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^
+288 |     mocker.patch("latin_itn_training.trainer_utils.ensure_branch_exists")
+289 |     mocker.patch("latin_itn_training.trainer_utils.publish_model_and_readme")
+    |
+
+S108 Probable insecure usage of temporary file or directory: "/tmp/out"
+   --> tests/test_trainer_utils.py:296:20
+    |
+294 |         run_name="test",
+295 |         target_epochs=1,
+296 |         output_dir="/tmp/out",
+    |                    ^^^^^^^^^^
+297 |         train_ds={"labels": [[0, 1, -100]]},
+298 |         eval_ds=MagicMock(),
+    |
+
+S106 Possible hardcoded password assigned to argument: "hf_token"
+   --> tests/test_trainer_utils.py:303:9
+    |
+301 |         callbacks=[],
+302 |         api=MagicMock(),
+303 |         hf_token="fake",
+    |         ^^^^^^^^^^^^^^^
+304 |         readme_content_fn=lambda t, e: "",
+305 |         commit_message="",
+    |
+
+Found 96 errors.
